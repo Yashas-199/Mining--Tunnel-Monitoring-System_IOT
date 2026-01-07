@@ -1,0 +1,358 @@
+.App {
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-title h1 {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #ffa500 0%, #ff6b35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.25rem;
+}
+
+.header-title p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.status-indicators {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.app-main {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.sensor-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Danger Alert Overlay */
+.danger-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.danger-alert {
+  background: linear-gradient(135deg, #ff3838 0%, #ff6b6b 100%);
+  color: white;
+  padding: 3rem;
+  border-radius: 20px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(255, 56, 56, 0.5);
+  animation: slideIn 0.5s ease, pulse 2s infinite;
+  border: 4px solid #fff;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 20px 60px rgba(255, 56, 56, 0.5);
+  }
+  50% {
+    box-shadow: 0 20px 80px rgba(255, 56, 56, 0.8);
+  }
+}
+
+.alert-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.danger-alert h2 {
+  font-size: 2rem;
+  margin: 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.danger-alert p {
+  font-size: 1.1rem;
+  margin: 0.75rem 0;
+}
+
+.alert-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1.5rem 0 !important;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.alert-action {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.alert-dismiss {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: white;
+  color: #ff3838;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.alert-dismiss:hover {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
+
+/* Light Status Section */
+.light-status-section {
+  margin-bottom: 2rem;
+}
+
+.light-status-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.light-status-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  transition: all 0.3s ease;
+}
+
+.light-status-card.light-off::before {
+  background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+}
+
+.light-status-card.light-on::before {
+  background: linear-gradient(90deg, #ff3838 0%, #ff6b6b 100%);
+  animation: pulse-border 1s infinite;
+}
+
+@keyframes pulse-border {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.light-icon {
+  font-size: 5rem;
+  animation: glow 2s infinite;
+}
+
+.light-status-card.light-on .light-icon {
+  animation: glow-danger 1s infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 56, 56, 0.8));
+}
+
+@keyframes glow {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes glow-danger {
+  0%, 100% { 
+    transform: scale(1);
+    filter: drop-shadow(0 0 20px rgba(255, 56, 56, 0.8));
+  }
+  50% { 
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 30px rgba(255, 56, 56, 1));
+  }
+}
+
+.light-info {
+  flex: 1;
+}
+
+.light-info h2 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+.light-state {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.light-status-card.light-on .light-state {
+  color: #ff3838;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.light-reason {
+  font-size: 1rem;
+  color: #666;
+  margin: 0.5rem 0 0 0;
+}
+
+.warning-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #ff3838;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: pulse-badge 1s infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 56, 56, 0.5);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 56, 56, 0.8);
+  }
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.chart-container {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+.chart-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.app-footer {
+  text-align: center;
+  color: white;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.app-footer p {
+  margin: 0.25rem 0;
+}
+
+.safety-notice {
+  color: #ffa500;
+  font-weight: bold;
+  margin-top: 0.5rem !important;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-title h1 {
+    font-size: 1.5rem;
+  }
+
+  .sensor-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+
+  .app-main {
+    padding: 0 1rem;
+  }
+}
